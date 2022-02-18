@@ -4,7 +4,6 @@
     dark
     :src="require('@/assets/img/bg' + rnd_bg + '.jpg')"
     v-model="drawer"
-    :value="false"
   >
     <v-list>
       <v-list-item v-for="(item, i) in items" :key="i" link :to="item.link">
