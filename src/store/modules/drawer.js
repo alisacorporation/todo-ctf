@@ -2,8 +2,7 @@ export default {
   actions: {},
   mutations: {
     UPDATE_DRAWER(state, value) {
-      console.log("UPDATE_DRAWER", value);
-      window.localStorage.setItem("drawer", value);
+      localStorage.drawer = JSON.stringify(value);
       state.drawer = value;
     },
   },

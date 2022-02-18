@@ -16,14 +16,10 @@ import Header from "@/components/Header";
 
 export default {
   components: { Header, Navigation },
-  beforeMount() {
-    if (window.localStorage.getItem("drawer") !== null) {
-      console.log("set drawer from localStorage");
-      this.$store.commit(
-        "UPDATE_DRAWER",
-        window.localStorage.getItem("drawer")
-      );
-    }
+  mounted() {
+    // WOOHOO, I flipped this mother
+    const drawer_parsed = JSON.parse(localStorage.drawer);
+    this.$store.commit("UPDATE_DRAWER", drawer_parsed);
   },
 };
 </script>
