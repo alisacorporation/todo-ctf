@@ -1,13 +1,46 @@
 <template>
-$END$
+  <v-navigation-drawer
+    app
+    dark
+    :src="require('@/assets/img/bg' + rnd_bg + '.jpg')"
+    v-model="drawer"
+    :value="false"
+  >
+    <v-list>
+      <v-list-item v-for="(item, i) in items" :key="i" link :to="item.link">
+        <v-list-item-icon>
+          <v-icon>{{ item.icon }}</v-icon>
+        </v-list-item-icon>
+
+        <v-list-item-content>
+          <v-list-item-title>{{ item.title }}</v-list-item-title>
+        </v-list-item-content>
+      </v-list-item>
+    </v-list>
+  </v-navigation-drawer>
 </template>
 
 <script>
+import { mapGetters } from "vuex";
+
 export default {
-name: "Navigation"
-}
+  name: "Navigation",
+  data: () => ({}),
+  computed: {
+    ...mapGetters(["items"]),
+    drawer: {
+      get() {
+        return this.$store.getters.drawer;
+      },
+      set(value) {
+        this.$store.commit("UPDATE_DRAWER", value);
+      },
+    },
+    rnd_bg() {
+      return Math.floor(Math.random() * 4) + 1;
+    },
+  },
+};
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>
