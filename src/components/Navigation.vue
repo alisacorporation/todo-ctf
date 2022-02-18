@@ -24,7 +24,6 @@ import { mapGetters } from "vuex";
 
 export default {
   name: "Navigation",
-  data: () => ({}),
   computed: {
     ...mapGetters(["items"]),
     drawer: {
