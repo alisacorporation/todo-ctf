@@ -8,7 +8,7 @@ export default {
     },
   },
   state: {
-    drawer: window.localStorage.getItem("drawer") ?? false,
+    drawer: false,
   },
   getters: {
     drawer: (state) => state.drawer,
