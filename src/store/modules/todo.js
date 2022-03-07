@@ -1,34 +1,54 @@
+const uid = require("lodash.uniqueid");
+
 export default {
   actions: {
-    add_todo({ commit, state, getters }, new_todo) {
-      if (getters.selection.length) {
-        let id = getters.todos.length;
-        const cb = (node) => {
+    add_todo({ commit, state }, new_todo) {
+      if (state.selection.length) {
+        const _cb = (node) => {
           if (Array.isArray(node)) {
-            node.forEach((root) => {
-              cb(root);
-            });
+            // node = node.filter((n) => getters.selection.indexOf(n.id) === -1);
+            node.forEach((n) => _cb(n));
           } else {
-            if (getters.selection.indexOf(node.id) !== -1) {
-              // TODO: ID Generation not working ;(
-              new_todo.id = id + 1;
-              id++;
-              node.children.push(new_todo);
+            if (state.selection.indexOf(node.id) !== -1) {
+              console.log("new_todo", new_todo);
+              let _new_todo = {
+                id: uid(), //new Date().getTime(),
+                name: new_todo.name,
+                created: new_todo.created,
+                updated: null,
+                icon: new_todo.icon,
+                completed: false,
+                children: [],
+              };
+              node.children.push(_new_todo);
+              const index = state.selection.indexOf(node.id);
+              state.selection.splice(index, 1);
             }
             if (node.children) {
               node.children.forEach((child) => {
-                cb(child);
+                _cb(child);
               });
             }
           }
+          // return node;
         };
-        cb(state.todos);
+
+        // state.todos =
+        _cb(state.todos);
 
         // update todos state
         commit("UPDATE_TODOS", state.todos);
       } else {
-        new_todo.id = getters.total_todo_nodes + 1;
-        commit("ADD_TODO", new_todo);
+        let _new_todo = {
+          id: Number.parseInt(uid()),
+          name: new_todo.name,
+          created: new_todo.created,
+          updated: null,
+          icon: new_todo.icon,
+          completed: false,
+          children: [],
+        };
+        commit("ADD_TODO", _new_todo);
       }
     },
     remove_todos({ commit, getters }) {
@@ -44,7 +64,6 @@ export default {
                 (n) => getters.selection.indexOf(n.id) === -1
               );
               node.children.forEach((child) => {
-                console.log("node", child.id);
                 _cb(child);
               });
             }
