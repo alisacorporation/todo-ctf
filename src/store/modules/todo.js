@@ -133,7 +133,7 @@ export default {
   },
   state: {
     selection_return_type: false,
-    selection_type: "independent", // leaf || independent
+    selection_type: "independent",
     total_todo_nodes: 0,
     selection: [],
     todos: [],
