@@ -6,13 +6,12 @@ export default {
       if (state.selection.length) {
         const _cb = (node) => {
           if (Array.isArray(node)) {
-            // node = node.filter((n) => getters.selection.indexOf(n.id) === -1);
             node.forEach((n) => _cb(n));
           } else {
             if (state.selection.indexOf(node.id) !== -1) {
               console.log("new_todo", new_todo);
               let _new_todo = {
-                id: uid(), //new Date().getTime(),
+                id: Number.parseInt(uid()),
                 name: new_todo.name,
                 created: new_todo.created,
                 updated: null,
@@ -30,12 +29,8 @@ export default {
               });
             }
           }
-          // return node;
         };
-
-        // state.todos =
         _cb(state.todos);
-
         // update todos state
         commit("UPDATE_TODOS", state.todos);
       } else {
@@ -70,7 +65,6 @@ export default {
           }
           return node;
         };
-
         todos = _cb(todos);
         commit("UPDATE_TODOS", todos);
         commit("UPDATE_SELECTION", []);
@@ -133,7 +127,7 @@ export default {
   },
   state: {
     selection_return_type: false,
-    selection_type: "independent", // leaf || independent
+    selection_type: "independent",
     total_todo_nodes: 0,
     selection: [],
     todos: [],
