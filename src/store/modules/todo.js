@@ -135,15 +135,20 @@ export default {
       }
     },
     toggle_open_nodes({ commit, getters }) {
-      if (getters.open_nodes.length === getters.total_todo_nodes) {
+      if (getters.open_nodes.length) {
         commit("UPDATE_OPEN_NODES", []);
       } else {
         const _cb = (node) => {
           if (Array.isArray(node)) {
             node.forEach((n) => _cb(n));
           } else {
-            commit("ADD_OPENED_NODE", node.id);
             if (node.children) {
+              if (
+                getters.open_nodes.indexOf(node.id) === -1 &&
+                node.children.length
+              ) {
+                commit("ADD_OPENED_NODE", node.id);
+              }
               node.children.forEach((c) => _cb(c));
             }
           }
@@ -158,6 +163,13 @@ export default {
         state.todos = JSON.parse(localStorage.todos);
       } catch (e) {
         localStorage.todos = JSON.stringify(state.todos);
+      }
+    },
+    INIT_OPEN_NODES(state) {
+      try {
+        state.open_nodes = JSON.parse(localStorage.open_nodes);
+      } catch (e) {
+        localStorage.open_nodes = JSON.stringify(state.open_nodes);
       }
     },
     RESET_TODOS(state) {
@@ -181,6 +193,9 @@ export default {
     },
     UPDATE_OPEN_NODES(state, nodes) {
       state.open_nodes = nodes;
+      if (localStorage.open_nodes) {
+        localStorage.open_nodes = JSON.stringify(state.open_nodes);
+      }
     },
     UPDATE_SELECTION(state, selection) {
       state.selection = selection;
