@@ -20,12 +20,9 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
-
 export default {
   name: "Navigation",
   computed: {
-    ...mapGetters(["items"]),
     drawer: {
       get() {
         return this.$store.getters.drawer;
@@ -36,6 +33,9 @@ export default {
     },
     rnd_bg() {
       return Math.floor(Math.random() * 4) + 1;
+    },
+    items() {
+      return this.$store.getters.items;
     },
   },
 };
