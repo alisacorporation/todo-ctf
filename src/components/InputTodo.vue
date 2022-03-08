@@ -54,6 +54,7 @@ export default {
         id: null,
         name: this.message,
         created: Date.now(),
+        started: null,
         updated: null,
         icon: this.icon,
         completed: false,
