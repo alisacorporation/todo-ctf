@@ -1,9 +1,5 @@
 <template>
   <v-form @submit.prevent="add_todo">
-    Reset todos:
-    <v-icon @click="reset_todos" class="cursor-pointer">mdi-restart</v-icon>
-    <br />
-    Nodes count: {{ this.$props.nodes_count }}
     <v-text-field
       v-model="message"
       append-outer-icon="mdi-plus-circle"
@@ -17,7 +13,7 @@
       @click:clear="clearMessage"
       @click:append-outer.prevent="add_todo"
       style="border-radius: 0"
-      class="mb-10"
+      class="mb-2"
     ></v-text-field>
   </v-form>
 </template>
@@ -31,6 +27,7 @@ export default {
     error: null,
     iconIndex: 0,
     icons: [
+      "mdi-format-list-checks",
       "mdi-language-html5",
       "mdi-language-css3",
       "mdi-language-javascript",
@@ -47,9 +44,6 @@ export default {
     },
   },
   methods: {
-    reset_todos() {
-      this.$store.dispatch("reset_todos");
-    },
     add_todo() {
       console.log("tried to add todo");
       if (!this.message) {
@@ -60,6 +54,7 @@ export default {
         id: null,
         name: this.message,
         created: Date.now(),
+        updated: null,
         icon: this.icon,
         completed: false,
         children: [],
@@ -82,8 +77,4 @@ export default {
 };
 </script>
 
-<style scoped>
-.cursor-pointer {
-  cursor: pointer;
-}
-</style>
+<style scoped></style>
