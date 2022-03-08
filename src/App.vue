@@ -18,9 +18,9 @@ export default {
   components: { Header, Navigation },
   beforeCreate() {
     this.$store.commit("INIT_TODOS");
+    this.$store.commit("INIT_OPEN_NODES");
   },
   mounted() {
-    // WOOHOO, I flipped this mother
     try {
       const drawer_parsed = JSON.parse(localStorage.drawer);
       this.$store.commit("UPDATE_DRAWER", drawer_parsed);
