@@ -1,11 +1,11 @@
 <template>
-  <v-app id="inspire">
+  <v-app>
     <Navigation />
     <Header />
     <v-main>
-      <div class="pa-2">
+      <v-container>
         <router-view />
-      </div>
+      </v-container>
     </v-main>
   </v-app>
 </template>
