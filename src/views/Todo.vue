@@ -115,11 +115,15 @@ export default {
   methods: {
     remove_todos() {
       this.dialog = false;
+      this.selection.forEach((s) =>
+        this.$store.commit("REMOVE_OPENED_NODE", s)
+      );
       this.$store.dispatch("remove_todos");
     },
     remove_todo(id) {
       console.log("prepared to remove id", id);
       this.$store.dispatch("remove_todo", id);
+      this.$store.commit("REMOVE_OPENED_NODE", id);
     },
     update_todo(id) {
       this.$store.dispatch("update_todo", id);
