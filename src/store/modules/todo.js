@@ -11,6 +11,7 @@ export default {
                 id: Math.random().toString(16).substring(2, 8),
                 name: new_todo.name,
                 created: new_todo.created,
+                started: null,
                 updated: null,
                 icon: new_todo.icon,
                 completed: false,
@@ -36,6 +37,7 @@ export default {
           id: Math.random().toString(16).substring(2, 8),
           name: new_todo.name,
           created: new_todo.created,
+          started: null,
           updated: null,
           icon: new_todo.icon,
           completed: false,
@@ -191,6 +193,10 @@ export default {
     ADD_OPENED_NODE(state, node) {
       state.open_nodes.unshift(node);
     },
+    REMOVE_OPENED_NODE(state, node) {
+      const index = state.open_nodes.indexOf(node);
+      if (index !== -1) state.open_nodes.splice(index, 1);
+    },
     UPDATE_OPEN_NODES(state, nodes) {
       state.open_nodes = nodes;
       if (localStorage.open_nodes) {
@@ -202,9 +208,6 @@ export default {
     },
     ADD_SELECTION(state, selection) {
       state.selection.unshift(selection);
-    },
-    REMOVE_SELECTION(state, selection) {
-      state.selection = state.selection.filter((s) => s.id !== selection);
     },
     RESET_SELECTION(state) {
       state.selection = [];
