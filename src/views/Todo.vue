@@ -53,6 +53,7 @@
             :selection-type="selection_type"
             :return-object="selection_return_type"
             :open="open_nodes"
+            @update:open="update_open"
             selectable
             transition
             hoverable
@@ -129,6 +130,9 @@ export default {
     },
     toggle_open_nodes() {
       this.$store.dispatch("toggle_open_nodes");
+    },
+    update_open(nodes) {
+      this.open_nodes = nodes;
     },
   },
   computed: {
