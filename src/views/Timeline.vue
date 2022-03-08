@@ -1,42 +1,30 @@
 <template>
-  <v-timeline>
+  <v-timeline v-if="todos.length">
     <v-timeline-item
-      v-for="(year, i) in years"
-      :key="i"
-      :color="year.color"
-      small
-      >timeline item</v-timeline-item
+      v-for="(todo, i) in todos"
+      :key="todo.id"
+      :icon="todo.icon"
+      :class="{ 'text-right': i % 2 !== 0 }"
     >
+      {{ todo.name }}
+    </v-timeline-item>
   </v-timeline>
 </template>
 
 <script>
 export default {
   name: "Timeline",
-  data: () => ({
-    years: [
-      {
-        color: "cyan",
-        year: "1960",
+  data: () => ({}),
+  computed: {
+    todos: {
+      set(todos) {
+        this.$store.commit("UPDATE_TODOS", todos);
       },
-      {
-        color: "green",
-        year: "1970",
+      get() {
+        return this.$store.getters.todos;
       },
-      {
-        color: "pink",
-        year: "1980",
-      },
-      {
-        color: "amber",
-        year: "1990",
-      },
-      {
-        color: "orange",
-        year: "2000",
-      },
-    ],
-  }),
+    },
+  },
 };
 </script>
 
