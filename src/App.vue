@@ -22,10 +22,11 @@ export default {
   },
   mounted() {
     try {
-      const drawer_parsed = JSON.parse(localStorage.drawer);
-      this.$store.commit("UPDATE_DRAWER", drawer_parsed);
+      if (localStorage.drawer) {
+        const drawer_parsed = JSON.parse(localStorage.drawer);
+        this.$store.commit("UPDATE_DRAWER", drawer_parsed);
+      }
     } catch (e) {
-      localStorage.drawer = JSON.stringify(this.$store.getters.drawer);
       console.log("error", e);
     }
   },
