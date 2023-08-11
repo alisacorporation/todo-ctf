@@ -1,24 +1,5 @@
 # todo
 
-## Project setup
-```
-npm install
-```
+Todo pet project with subtasks (using Vue.js2 & Vuetify)
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
-
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+![Screenshot](https://raw.githubusercontent.com/alisacorporation/todo-ctf/master/Screenshot_2023-08-11_14-25-27.png)
