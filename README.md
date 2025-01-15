@@ -1,6 +1,6 @@
 # ToDo-CTF
 
-Welcome to the Alisa Corporation :: ToDo-CTF pet project! This repository contains a Vue.js application using Vuetify for managing to-do tasks, integrated with various tools and configurations for development.
+Welcome to the ToDo-CTF pet project! This repository contains a Vue.js application using Vuetify for managing to-do tasks, integrated with various tools and configurations for development.
 
 ## Setup
 
